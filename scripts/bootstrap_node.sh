@@ -73,3 +73,5 @@ ansible-playbook -i hosts install.yml
 
 ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0001 end_id=0002 agent_type=private"
 ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0003 end_id=0004 agent_type=public"
+
+## Finally open up ports 8080 on master and as needed by apps on master/agent nodes
