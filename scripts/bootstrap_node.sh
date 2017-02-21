@@ -53,10 +53,23 @@ cd dcos-gce
 cp scripts/.ansible.cfg ~/.ansible.cfg
 
 ## Part 4
+# Open vim group_vars/all and fill in first 4 fields according to your project, 
+# zone and the Public IP of the bootstrap node, my sample looks like…
+# ---
+# project: microservices-poc-143218 
+# subnet: default
+# login_name: vbiyani 
+# bootstrap_public_ip: 130.211.202.228 
+# zone: us-central1-b 
+
 # Open hosts file in the folder dcos-gce. Now here you need to give the private address of bootstrap node +1. 
 # So if bootstrap nodes private address is 10.128.0.2 
 # In some cases this next IP is taken and script will throw error saying the node with that IP exists, then keep incrementing it till script works
 # master0 ip=10.128.0.3
+# This will create a master node
 ansible-playbook -i hosts install.yml
 # Take a cup of coffee, this will take some time
+# Finally Create two private and two public nodes - you can customize names etc. as needed below
 
+ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0001 end_id=0002 agent_type=private"
+ansible-playbook -i hosts add_agents.yml --extra-vars "start_id=0003 end_id=0004 agent_type=public"
