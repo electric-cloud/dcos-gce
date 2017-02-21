@@ -30,4 +30,5 @@
       register: master_instance_jobs
       until : master_instance_jobs.finished
       retries: 300
+      delay: 15
       with_items: "{{ master_instances.results }}"
